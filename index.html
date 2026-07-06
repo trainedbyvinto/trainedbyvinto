@@ -482,18 +482,39 @@
 </footer>
 <script>
 document.querySelectorAll("[data-slider]").forEach(slider=>{
- const clip=slider.querySelector("[data-clip]");
+ const clip=slider.querySelector("[data-clip], .after-clip");
  const handle=slider.querySelector("[data-handle]");
  const afterImg=slider.querySelector(".layer.after img");
- let dragging=false;
+ if(!handle)return;
+ slider.style.touchAction="none";
+ slider.style.cursor="ew-resize";
+ handle.style.pointerEvents="none";
+ const tags=slider.querySelector(".ba-tags");
+ if(tags) tags.style.pointerEvents="none";
+ let dragging=false, pid=null;
  function sync(){if(afterImg) afterImg.style.width=slider.clientWidth+"px";}
  sync();window.addEventListener("resize",sync);
- function update(x){const r=slider.getBoundingClientRect();let p=(x-r.left)/r.width;p=Math.max(0,Math.min(1,p));clip.style.width=(p*100)+"%";handle.style.left=(p*100)+"%";}
- handle.addEventListener("pointerdown",e=>{dragging=true;handle.setPointerCapture(e.pointerId);e.preventDefault();});
- handle.addEventListener("pointermove",e=>{if(!dragging)return;update(e.clientX);});
- handle.addEventListener("pointerup",()=>dragging=false);
- handle.addEventListener("pointercancel",()=>dragging=false);
- slider.addEventListener("click",e=>{if(dragging)return;update(e.clientX);});
+ function update(x){
+   const r=slider.getBoundingClientRect();
+   let p=(x-r.left)/r.width;
+   p=Math.max(0,Math.min(1,p));
+   const pct=(p*100)+"%";
+   if(clip) clip.style.width=pct;
+   handle.style.left=pct;
+ }
+ slider.addEventListener("pointerdown",e=>{
+   dragging=true; pid=e.pointerId;
+   try{slider.setPointerCapture(e.pointerId);}catch(_){}
+   update(e.clientX); e.preventDefault();
+ });
+ slider.addEventListener("pointermove",e=>{
+   if(!dragging||e.pointerId!==pid)return;
+   update(e.clientX); e.preventDefault();
+ });
+ const end=e=>{if(!dragging)return;dragging=false;try{slider.releasePointerCapture(e.pointerId);}catch(_){}};
+ slider.addEventListener("pointerup",end);
+ slider.addEventListener("pointercancel",end);
+ slider.addEventListener("lostpointercapture",end);
 });
 </script>
 <script>
@@ -535,5 +556,6 @@ This environment can't reliably perform that multi-hundred-line refactor while
 preserving the rest of the file. The original file has been copied unchanged.
 -->
 
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a16f4215ebfe265f',t:'MTc4MzM0NzcxMA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"7f7b0fd8732c4326aae4b9d58d5c514a","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
