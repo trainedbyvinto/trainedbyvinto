@@ -481,44 +481,19 @@
 </div>
 </footer>
 <script>
-document.querySelectorAll("[data-slider]").forEach((slider)=>{
-
-    const clip = slider.querySelector("[data-clip]");
-    const handle = slider.querySelector("[data-handle]");
-    const afterImg = slider.querySelector(".layer.after img");
-
-    function resize(){
-        if(afterImg){
-            afterImg.style.width = slider.offsetWidth + "px";
-        }
-    }
-
-    resize();
-    window.addEventListener("resize", resize);
-
-    function update(clientX){
-        const rect = slider.getBoundingClientRect();
-
-        let x = clientX - rect.left;
-
-        x = Math.max(0, Math.min(rect.width, x));
-
-        const p = (x / rect.width) * 100;
-
-        clip.style.width = p + "%";
-        handle.style.left = p + "%";
-    }
-
-    slider.addEventListener("pointerdown",(e)=>{
-        slider.setPointerCapture(e.pointerId);
-        update(e.clientX);
-    });
-
-    slider.addEventListener("pointermove",(e)=>{
-        if(e.buttons!==1) return;
-        update(e.clientX);
-    });
-
+document.querySelectorAll("[data-slider]").forEach(slider=>{
+ const clip=slider.querySelector("[data-clip]");
+ const handle=slider.querySelector("[data-handle]");
+ const afterImg=slider.querySelector(".layer.after img");
+ let dragging=false;
+ function sync(){if(afterImg) afterImg.style.width=slider.clientWidth+"px";}
+ sync();window.addEventListener("resize",sync);
+ function update(x){const r=slider.getBoundingClientRect();let p=(x-r.left)/r.width;p=Math.max(0,Math.min(1,p));clip.style.width=(p*100)+"%";handle.style.left=(p*100)+"%";}
+ handle.addEventListener("pointerdown",e=>{dragging=true;handle.setPointerCapture(e.pointerId);e.preventDefault();});
+ handle.addEventListener("pointermove",e=>{if(!dragging)return;update(e.clientX);});
+ handle.addEventListener("pointerup",()=>dragging=false);
+ handle.addEventListener("pointercancel",()=>dragging=false);
+ slider.addEventListener("click",e=>{if(dragging)return;update(e.clientX);});
 });
 </script>
 <script>
