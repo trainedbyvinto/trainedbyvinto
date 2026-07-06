@@ -481,55 +481,45 @@
 </div>
 </footer>
 <script>
-  <script>
-document.querySelectorAll("[data-slider]").forEach((slider) => {
+document.querySelectorAll("[data-slider]").forEach((slider)=>{
 
     const clip = slider.querySelector("[data-clip]");
     const handle = slider.querySelector("[data-handle]");
     const afterImg = slider.querySelector(".layer.after img");
 
-    function syncSize(){
+    function resize(){
         if(afterImg){
             afterImg.style.width = slider.offsetWidth + "px";
         }
     }
 
-    syncSize();
-    window.addEventListener("resize", syncSize);
+    resize();
+    window.addEventListener("resize", resize);
 
     function update(clientX){
-
         const rect = slider.getBoundingClientRect();
 
         let x = clientX - rect.left;
 
-        if(x < 0) x = 0;
-        if(x > rect.width) x = rect.width;
+        x = Math.max(0, Math.min(rect.width, x));
 
-        const percent = x / rect.width * 100;
+        const p = (x / rect.width) * 100;
 
-        clip.style.width = percent + "%";
-        handle.style.left = percent + "%";
+        clip.style.width = p + "%";
+        handle.style.left = p + "%";
     }
 
     slider.addEventListener("pointerdown",(e)=>{
-
         slider.setPointerCapture(e.pointerId);
-
         update(e.clientX);
-
     });
 
     slider.addEventListener("pointermove",(e)=>{
-
-        if(e.buttons !== 1) return;
-
+        if(e.buttons!==1) return;
         update(e.clientX);
-
     });
 
 });
-</script>
 </script>
 <script>
 const form=document.getElementById('contact-form');
