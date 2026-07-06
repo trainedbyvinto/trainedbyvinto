@@ -481,50 +481,55 @@
 </div>
 </footer>
 <script>
-  document.querySelectorAll('[data-slider]').forEach(function(slider){
-    const clip = slider.querySelector('[data-clip]');
-    const handle = slider.querySelector('[data-handle]');
-    const afterImg = slider.querySelector('.layer.after img');
-    let dragging = false;
+  <script>
+document.querySelectorAll("[data-slider]").forEach((slider) => {
 
-    function syncAfterWidth(){
-      if(afterImg) afterImg.style.width = slider.clientWidth + 'px';
-    }
-    syncAfterWidth();
-    window.addEventListener('resize', syncAfterWidth);
+    const clip = slider.querySelector("[data-clip]");
+    const handle = slider.querySelector("[data-handle]");
+    const afterImg = slider.querySelector(".layer.after img");
 
-    function setPosition(clientX){
-      const rect = slider.getBoundingClientRect();
-      let pct = ((clientX - rect.left) / rect.width) * 100;
-      pct = Math.max(0, Math.min(100, pct));
-      clip.style.width = pct + '%';
-      handle.style.left = pct + '%';
+    function syncSize(){
+        if(afterImg){
+            afterImg.style.width = slider.offsetWidth + "px";
+        }
     }
 
-    handle.addEventListener('pointerdown', function(e){ e.stopPropagation();
-      dragging = true;
-      slider.setPointerCapture(e.pointerId);
-      setPosition(e.clientX);
-    });
-    slider.addEventListener('pointermove', function(e){
-      if(dragging) setPosition(e.clientX);
-    });
-    slider.addEventListener('pointerup', function(){ dragging = false; });
-    slider.addEventListener('pointerleave', function(){ dragging = false; });
+    syncSize();
+    window.addEventListener("resize", syncSize);
 
-    // keyboard accessibility
-    slider.setAttribute('tabindex','0');
-    slider.setAttribute('role','slider');
-    slider.setAttribute('aria-label','Vorher-Nachher Vergleich');
-    slider.addEventListener('keydown', function(e){
-      const rect = slider.getBoundingClientRect();
-      let current = parseFloat(clip.style.width) || 50;
-      if(e.key === 'ArrowRight') current = Math.min(100, current + 5);
-      if(e.key === 'ArrowLeft') current = Math.max(0, current - 5);
-      clip.style.width = current + '%';
-      handle.style.left = current + '%';
+    function update(clientX){
+
+        const rect = slider.getBoundingClientRect();
+
+        let x = clientX - rect.left;
+
+        if(x < 0) x = 0;
+        if(x > rect.width) x = rect.width;
+
+        const percent = x / rect.width * 100;
+
+        clip.style.width = percent + "%";
+        handle.style.left = percent + "%";
+    }
+
+    slider.addEventListener("pointerdown",(e)=>{
+
+        slider.setPointerCapture(e.pointerId);
+
+        update(e.clientX);
+
     });
-  });
+
+    slider.addEventListener("pointermove",(e)=>{
+
+        if(e.buttons !== 1) return;
+
+        update(e.clientX);
+
+    });
+
+});
+</script>
 </script>
 <script>
 const form=document.getElementById('contact-form');
