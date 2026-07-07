@@ -13,12 +13,14 @@ export default function App() {
       <div className="grain"></div>
       <ScrollToTop />
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/programme" element={<Programs />} />
-        <Route path="/ergebnisse" element={<Results />} />
-        <Route path="/kontakt" element={<Contact />} />
-      </Routes>
+      <main className="site-main">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/programme" element={<Programs />} />
+          <Route path="/ergebnisse" element={<Results />} />
+          <Route path="/kontakt" element={<Contact />} />
+        </Routes>
+      </main>
       <Footer />
     </>
   )

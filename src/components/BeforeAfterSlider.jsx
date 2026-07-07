@@ -13,6 +13,7 @@ export default function BeforeAfterSlider({ beforeSrc, afterSrc, beforeAlt, afte
   }
 
   function handlePointerDown(e) {
+    e.preventDefault()
     draggingRef.current = true
     sliderRef.current.setPointerCapture(e.pointerId)
     setPositionFromClientX(e.clientX)
@@ -49,11 +50,11 @@ export default function BeforeAfterSlider({ beforeSrc, afterSrc, beforeAlt, afte
         onKeyDown={handleKeyDown}
       >
         <div className="layer before">
-          <img src={beforeSrc} alt={beforeAlt} />
+          <img src={beforeSrc} alt={beforeAlt} draggable={false} />
         </div>
         <div className="after-clip" style={{ width: `${pct}%` }}>
           <div className="layer after" style={{ width: `${100 / (pct / 100 || 1)}%` }}>
-            <img src={afterSrc} alt={afterAlt} />
+            <img src={afterSrc} alt={afterAlt} draggable={false} />
           </div>
         </div>
         <div className="ba-tags"><span>Vorher</span><span>Nachher</span></div>

@@ -11,14 +11,23 @@
 }
 
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth; height:100%;}
 body{
   margin:0;
+  min-height:100%;
   background:var(--concrete);
   color:var(--charcoal);
   font-family:'Work Sans', sans-serif;
   -webkit-font-smoothing:antialiased;
 }
+#root{
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+.site-main{flex:1 0 auto; display:flex; flex-direction:column;}
+.site-main > section{flex:1 0 auto; display:flex; flex-direction:column; justify-content:center;}
+footer{flex-shrink:0;}
 
 h1,h2,h3,.display{
   font-family:'Anton', sans-serif;
@@ -34,7 +43,7 @@ h1,h2,h3,.display{
   letter-spacing:0.03em;
 }
 
-.wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+.wrap{width:100%; max-width:1180px; margin:0 auto; padding:0 32px;}
 
 a{color:inherit;}
 
@@ -221,12 +230,10 @@ section{padding:96px 0;}
 }
 .ba-slider .layer img{
   width:100%; height:100%; object-fit:cover; display:block;
+  -webkit-user-drag:none; user-drag:none; pointer-events:none;
 }
 .after-clip{
   position:absolute; inset:0; overflow:hidden;
-}
-.after-clip .layer.after img{
-  height:100%; width:auto; max-width:none; object-fit:cover;
 }
 .ba-handle{
   position:absolute; top:0; bottom:0; width:0;
