@@ -91,6 +91,19 @@ nav{
   background:var(--charcoal); color:var(--concrete); padding:11px 20px;
   text-decoration:none; border-radius:var(--radius);
 }
+.navlinks-cta{display:none;}
+
+.nav-toggle{
+  display:none; flex-direction:column; justify-content:center; gap:5px;
+  width:32px; height:32px; padding:0; background:none; border:none; cursor:pointer;
+}
+.nav-toggle span{
+  display:block; width:100%; height:2px; background:var(--charcoal);
+  transition:transform .25s ease, opacity .25s ease;
+}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle.open span:nth-child(2){opacity:0;}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
 /* ---------- hero ---------- */
 .hero{
@@ -164,10 +177,15 @@ section{padding:96px 0;}
   display:block;
 }
 .about p{font-size:17px; line-height:1.75; color:#C8CDD3; margin-bottom:18px;}
-.about-creds{display:flex; gap:28px; margin-top:32px; flex-wrap:wrap;}
+.about-creds{display:flex; flex-direction:row; flex-wrap:wrap; gap:14px 28px; margin-top:32px;}
 .about-creds div{
-  border-left:2px solid var(--chalk); padding-left:14px; font-size:13px;
+  padding-left:26px; font-size:13px; line-height:1.5;
   text-transform:uppercase; letter-spacing:0.04em; color:var(--concrete);
+  position:relative;
+}
+.about-creds div::before{
+  content:"✓"; position:absolute; left:0; top:0;
+  color:var(--chalk); font-weight:700;
 }
 
 /* ---------- programs ---------- */
@@ -299,7 +317,22 @@ footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12
 footer a{text-decoration:none; color:#AEB6BF;}
 
 @media (max-width:860px){
-  .navlinks{display:none;}
+  .nav-toggle{display:flex;}
+  .navcta-desktop{display:none;}
+  .navlinks{
+    display:flex; flex-direction:column; gap:0;
+    position:absolute; top:100%; left:0; right:0;
+    background:var(--concrete); border-bottom:1px solid var(--line);
+    max-height:0; overflow:hidden; opacity:0;
+    transition:max-height .3s ease, opacity .25s ease;
+  }
+  .navlinks.open{max-height:400px; opacity:1;}
+  .navlinks li{width:100%;}
+  .navlinks a{display:block; padding:16px 32px;}
+  .navlinks a::after{display:none;}
+  .navlinks-cta{display:block; padding:8px 32px 20px;}
+  .navlinks-cta .navcta{display:inline-block; padding:11px 20px; color:var(--concrete);}
+  nav{position:relative;}
   .about-grid{grid-template-columns:1fr;}
   .programs-grid{grid-template-columns:1fr;}
   .slider-grid{grid-template-columns:1fr;}
