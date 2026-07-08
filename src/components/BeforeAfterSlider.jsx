@@ -3,7 +3,6 @@ import { useRef, useState } from 'react'
 export default function BeforeAfterSlider({ beforeSrc, afterSrc, beforeAlt, afterAlt }) {
   const sliderRef = useRef(null)
   const [pct, setPct] = useState(50)
-  const draggingRef = useRef(false)
 
   function setPositionFromClientX(clientX) {
     const rect = sliderRef.current.getBoundingClientRect()
@@ -12,19 +11,21 @@ export default function BeforeAfterSlider({ beforeSrc, afterSrc, beforeAlt, afte
     setPct(next)
   }
 
-  function handlePointerDown(e) {
-    e.preventDefault()
-    draggingRef.current = true
-    sliderRef.current.setPointerCapture(e.pointerId)
+  function handlePointerMove(e) {
     setPositionFromClientX(e.clientX)
   }
 
-  function handlePointerMove(e) {
-    if (draggingRef.current) setPositionFromClientX(e.clientX)
+  function stopDragging() {
+    window.removeEventListener('pointermove', handlePointerMove)
+    window.removeEventListener('pointerup', stopDragging)
+    window.removeEventListener('pointercancel', stopDragging)
   }
 
-  function stopDragging() {
-    draggingRef.current = false
+  function handlePointerDown(e) {
+    e.preventDefault()
+    window.addEventListener('pointermove', handlePointerMove)
+    window.addEventListener('pointerup', stopDragging)
+    window.addEventListener('pointercancel', stopDragging)
   }
 
   function handleKeyDown(e) {
@@ -34,21 +35,7 @@ export default function BeforeAfterSlider({ beforeSrc, afterSrc, beforeAlt, afte
 
   return (
     <>
-      <div
-        className="ba-slider"
-        ref={sliderRef}
-        tabIndex={0}
-        role="slider"
-        aria-label="Vorher-Nachher Vergleich"
-        aria-valuenow={Math.round(pct)}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={stopDragging}
-        onPointerLeave={stopDragging}
-        onKeyDown={handleKeyDown}
-      >
+      <div className="ba-slider" ref={sliderRef}>
         <div className="layer before">
           <img src={beforeSrc} alt={beforeAlt} draggable={false} />
         </div>
@@ -58,7 +45,18 @@ export default function BeforeAfterSlider({ beforeSrc, afterSrc, beforeAlt, afte
           </div>
         </div>
         <div className="ba-tags"><span>Vorher</span><span>Nachher</span></div>
-        <div className="ba-handle" style={{ left: `${pct}%` }}>
+        <div
+          className="ba-handle"
+          style={{ left: `${pct}%` }}
+          tabIndex={0}
+          role="slider"
+          aria-label="Vorher-Nachher Vergleich"
+          aria-valuenow={Math.round(pct)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          onPointerDown={handlePointerDown}
+          onKeyDown={handleKeyDown}
+        >
           <div className="ba-line"></div>
           <div className="ba-grip">↔</div>
         </div>

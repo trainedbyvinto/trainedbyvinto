@@ -238,9 +238,9 @@ section{padding:96px 0;}
 .slide-card{display:flex; flex-direction:column; gap:14px;}
 .ba-slider{
   position:relative; width:100%; aspect-ratio:3/4;
-  border-radius:var(--radius); overflow:hidden; cursor:ew-resize;
+  border-radius:var(--radius); overflow:hidden;
   border:1px solid var(--line);
-  user-select:none; touch-action:none;
+  user-select:none; touch-action:pan-y;
 }
 .ba-slider .layer{
   position:absolute; inset:0; width:100%; height:100%;
@@ -254,16 +254,16 @@ section{padding:96px 0;}
   position:absolute; inset:0; overflow:hidden;
 }
 .ba-handle{
-  position:absolute; top:0; bottom:0; width:0;
-  pointer-events:none;
+  position:absolute; top:0; bottom:0; width:44px; margin-left:-22px;
+  touch-action:none; cursor:ew-resize;
 }
 .ba-line{
-  position:absolute; top:0; bottom:0; left:0; width:3px;
+  position:absolute; top:0; bottom:0; left:50%; width:3px; transform:translateX(-50%);
   background:var(--chalk);
   box-shadow:0 0 0 1px rgba(0,0,0,0.3);
 }
 .ba-grip{
-  position:absolute; top:50%; left:0; transform:translate(-50%,-50%);
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
   width:52px; height:52px; border-radius:50%;
   background:radial-gradient(circle at 35% 30%, #E4D98C, var(--chalk) 55%, #8f8038 100%);
   border:3px solid var(--charcoal);
