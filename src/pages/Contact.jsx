@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export default function Contact() {
+  const { t } = useTranslation()
   const [submitting, setSubmitting] = useState(false)
   const [message, setMessage] = useState({ text: '', color: '' })
 
@@ -14,15 +16,15 @@ export default function Contact() {
       const data = await res.json()
       if (data.success) {
         setMessage({
-          text: 'Vielen Dank für deine Anfrage! Ich habe deine Nachricht erhalten und werde mich innerhalb von 48 Stunden bei dir melden.',
+          text: t('contact.successMessage'),
           color: '#8FB8CC',
         })
         form.reset()
       } else {
-        setMessage({ text: 'Beim Senden ist ein Fehler aufgetreten. Bitte versuche es erneut.', color: '#ff6b6b' })
+        setMessage({ text: t('contact.errorMessage'), color: '#ff6b6b' })
       }
     } catch {
-      setMessage({ text: 'Beim Senden ist ein Fehler aufgetreten. Bitte versuche es erneut.', color: '#ff6b6b' })
+      setMessage({ text: t('contact.errorMessage'), color: '#ff6b6b' })
     }
     setSubmitting(false)
   }
@@ -30,20 +32,20 @@ export default function Contact() {
   return (
     <section className="cta" id="contact">
       <div className="wrap">
-        <h2>Bereit für dein System?</h2>
-        <p>Vereinbare ein kostenloses 20-minütiges Erstgespräch. Gemeinsam besprechen wir deine Ziele und finden heraus, ob mein Coaching zu dir passt.</p>
+        <h2>{t('contact.heading')}</h2>
+        <p>{t('contact.subheading')}</p>
         <form action="https://api.web3forms.com/submit" method="POST" onSubmit={handleSubmit}>
           <input type="hidden" name="access_key" value="ce19bb5f-1b2a-44b7-9b52-73dfa427bbbf" />
-          <input type="hidden" name="subject" value="Neue Coaching-Anfrage von trainedbyvinto.com" />
+          <input type="hidden" name="subject" value={t('contact.emailSubject')} />
           <input type="checkbox" name="botcheck" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
 
-          <input type="text" name="name" placeholder="Dein Name" required />
-          <input type="email" name="email" placeholder="Deine E-Mail" required />
+          <input type="text" name="name" placeholder={t('contact.namePlaceholder')} required />
+          <input type="email" name="email" placeholder={t('contact.emailPlaceholder')} required />
           <input
             type="submit"
             className="btn-primary"
             style={{ cursor: 'pointer', border: 'none' }}
-            value={submitting ? 'Wird gesendet...' : 'Absenden'}
+            value={submitting ? t('contact.submitting') : t('contact.submit')}
             disabled={submitting}
           />
         </form>

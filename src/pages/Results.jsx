@@ -1,46 +1,29 @@
+import { useTranslation } from 'react-i18next'
 import BeforeAfterSlider from '../components/BeforeAfterSlider'
 
-const transformations = [
-  {
-    before: '/images/transformation-1-before.jpg',
-    after: '/images/transformation-1-after.jpg',
-    label: 'Meine Reise',
-    duration: '4 Jahre',
-  },
-  {
-    before: '/images/transformation-2-before.jpg',
-    after: '/images/transformation-2-after.jpg',
-    label: '–9 kg',
-    duration: '5 Wochen',
-  },
-  {
-    before: '/images/transformation-3-before.jpg',
-    after: '/images/transformation-3-after.jpg',
-    label: '–12 kg',
-    duration: '4 Monate',
-  },
-]
-
 export default function Results() {
+  const { t } = useTranslation()
+  const transformations = t('results.transformations', { returnObjects: true })
+
   return (
     <section className="transformations" id="transformations">
       <div className="wrap">
         <div className="section-head">
-          <span className="eyebrow">Ergebnisse</span>
-          <h2>Echte Fortschritte</h2>
-          <p>Zieh die Trennlinie nach rechts, um vorher/nachher zu vergleichen.</p>
+          <span className="eyebrow">{t('results.eyebrow')}</span>
+          <h2>{t('results.heading')}</h2>
+          <p>{t('results.subheading')}</p>
         </div>
 
         <div className="slider-grid">
-          {transformations.map((t) => (
-            <div className="slide-card" key={t.label}>
+          {transformations.map((tf) => (
+            <div className="slide-card" key={tf.label}>
               <BeforeAfterSlider
-                beforeSrc={t.before}
-                afterSrc={t.after}
-                beforeAlt={`${t.label} vorher`}
-                afterAlt={`${t.label} nachher`}
+                beforeSrc={tf.before}
+                afterSrc={tf.after}
+                beforeAlt={t('results.altBefore', { label: tf.label })}
+                afterAlt={t('results.altAfter', { label: tf.label })}
               />
-              <div className="slide-meta"><b>{t.label}</b><span>{t.duration}</span></div>
+              <div className="slide-meta"><b>{tf.label}</b><span>{tf.duration}</span></div>
             </div>
           ))}
         </div>

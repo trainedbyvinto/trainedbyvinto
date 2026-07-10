@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export default function BeforeAfterSlider({ beforeSrc, afterSrc, beforeAlt, afterAlt }) {
+  const { t } = useTranslation()
   const sliderRef = useRef(null)
   const [pct, setPct] = useState(50)
 
@@ -44,13 +46,13 @@ export default function BeforeAfterSlider({ beforeSrc, afterSrc, beforeAlt, afte
             <img src={afterSrc} alt={afterAlt} draggable={false} />
           </div>
         </div>
-        <div className="ba-tags"><span>Vorher</span><span>Nachher</span></div>
+        <div className="ba-tags"><span>{t('slider.before')}</span><span>{t('slider.after')}</span></div>
         <div
           className="ba-handle"
           style={{ left: `${pct}%` }}
           tabIndex={0}
           role="slider"
-          aria-label="Vorher-Nachher Vergleich"
+          aria-label={t('slider.ariaLabel')}
           aria-valuenow={Math.round(pct)}
           aria-valuemin={0}
           aria-valuemax={100}
@@ -61,7 +63,7 @@ export default function BeforeAfterSlider({ beforeSrc, afterSrc, beforeAlt, afte
           <div className="ba-grip">↔</div>
         </div>
       </div>
-      <div className="slider-hint mono">↔ Ziehen zum Vergleichen</div>
+      <div className="slider-hint mono">{t('slider.hint')}</div>
     </>
   )
 }

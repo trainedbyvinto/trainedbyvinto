@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 export default function ProgramCard({ tag, title, features, price, priceUnit }) {
+  const { t } = useTranslation()
+
   return (
     <div className="program-card">
       <span className="program-tag">{tag}</span>
@@ -11,7 +14,7 @@ export default function ProgramCard({ tag, title, features, price, priceUnit }) 
         ))}
       </ul>
       <div className="program-price">{price}<span> {priceUnit}</span></div>
-      <Link className="program-cta" to="/kontakt">Jetzt anfragen</Link>
+      <Link className="program-cta" to={t('paths.contact')}>{t('programs.cta')}</Link>
     </div>
   )
 }

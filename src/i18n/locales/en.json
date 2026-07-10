@@ -1,0 +1,135 @@
+{
+  "meta": {
+    "title": "trainedbyvinto — Coaching"
+  },
+  "nav": {
+    "about": "About",
+    "programs": "Programs",
+    "results": "Results",
+    "contact": "Contact",
+    "cta": "First Consult",
+    "menuToggle": "Open menu"
+  },
+  "paths": {
+    "home": "/en",
+    "programs": "/en/programs",
+    "results": "/en/results",
+    "contact": "/en/contact"
+  },
+  "footer": {
+    "copyright": "© 2026 trainedbyvinto — Lucerne, Switzerland"
+  },
+  "home": {
+    "hero": {
+      "tag": "1:1 & Online Coaching",
+      "titleLine1": "Precision.",
+      "titleLine2": "Progress.",
+      "titleEm": "Results.",
+      "subtitle": "No guesswork. No cookie-cutter plans. Evidence-based training and nutrition strategies, tailored to your goals.",
+      "ctaPrimary": "Book your first consult",
+      "ctaGhost": "See results",
+      "statClientsValue": "10+",
+      "statClientsLabel": "clients coached",
+      "statPlansValue": "100%",
+      "statPlansLabel": "individual plans"
+    },
+    "about": {
+      "eyebrow": "About",
+      "name": "Vinto",
+      "portraitAlt": "Vincent, trainer at trainedbyvinto",
+      "p1": "I'm Vincent. Bodybuilding is more than a hobby to me – it's part of my life and an absolute passion. My goal isn't just to hand you a training plan, but to build a system that fits your daily routine, your body, and your goals.",
+      "p2": "Every program is tailored individually. With structured training, well-planned nutrition, and regular check-ins, we make sure you're making constant progress – no guesswork, no cookie-cutter plans. You'll always know exactly where you stand and what the next step is.",
+      "cred1a": "Individual",
+      "cred1b": "Coaching",
+      "cred2a": "Training &",
+      "cred2b": "Nutrition",
+      "cred3a": "Online &",
+      "cred3b": "Lucerne, CH"
+    }
+  },
+  "programs": {
+    "eyebrow": "Programs",
+    "heading": "Choose your coaching",
+    "subheading": "Three coaching models. One principle: progress with a system.",
+    "cta": "Get in touch",
+    "list": [
+      {
+        "tag": "In Person",
+        "title": "1:1 Personal Training",
+        "features": [
+          "Individual training at the studio",
+          "Ongoing technique optimization",
+          "Personal guidance in every session"
+        ],
+        "price": "From CHF 60",
+        "priceUnit": "/ session"
+      },
+      {
+        "tag": "Location Independent",
+        "title": "Online Coaching",
+        "features": [
+          "Individual training and nutrition plan",
+          "Weekly check-ins",
+          "Direct WhatsApp chat support"
+        ],
+        "price": "From CHF 100",
+        "priceUnit": "/ month"
+      },
+      {
+        "tag": "Combination",
+        "title": "Hybrid Coaching",
+        "features": [
+          "Online coaching plus regular PT sessions",
+          "Personal technique feedback",
+          "Individual adjustments & support at the gym"
+        ],
+        "price": "From CHF 250",
+        "priceUnit": "/ month"
+      }
+    ]
+  },
+  "results": {
+    "eyebrow": "Results",
+    "heading": "Real progress",
+    "subheading": "Drag the divider to the right to compare before and after.",
+    "altBefore": "{{label}} before",
+    "altAfter": "{{label}} after",
+    "transformations": [
+      {
+        "before": "/images/transformation-1-before.jpg",
+        "after": "/images/transformation-1-after.jpg",
+        "label": "My journey",
+        "duration": "4 years"
+      },
+      {
+        "before": "/images/transformation-2-before.jpg",
+        "after": "/images/transformation-2-after.jpg",
+        "label": "–9 kg",
+        "duration": "5 weeks"
+      },
+      {
+        "before": "/images/transformation-3-before.jpg",
+        "after": "/images/transformation-3-after.jpg",
+        "label": "–12 kg",
+        "duration": "4 months"
+      }
+    ]
+  },
+  "slider": {
+    "before": "Before",
+    "after": "After",
+    "ariaLabel": "Before-after comparison",
+    "hint": "↔ Drag to compare"
+  },
+  "contact": {
+    "heading": "Ready for your system?",
+    "subheading": "Book a free 20-minute consultation. Together we'll talk through your goals and find out if my coaching is the right fit for you.",
+    "emailSubject": "New coaching inquiry from trainedbyvinto.com",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "Your email",
+    "submit": "Send",
+    "submitting": "Sending...",
+    "successMessage": "Thanks for reaching out! I've received your message and will get back to you within 48 hours.",
+    "errorMessage": "Something went wrong while sending. Please try again."
+  }
+}

@@ -92,6 +92,12 @@ nav{
   text-decoration:none; border-radius:var(--radius);
 }
 .navlinks-cta{display:none;}
+.lang-switch a{
+  font-size:13px; text-transform:uppercase; letter-spacing:0.08em;
+  text-decoration:none; font-weight:600; color:var(--charcoal); opacity:0.5;
+}
+.lang-switch a.active{opacity:1;}
+.lang-switch a:hover{opacity:1;}
 
 .nav-toggle{
   display:none; flex-direction:column; justify-content:center; gap:5px;

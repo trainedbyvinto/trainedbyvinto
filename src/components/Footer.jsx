@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 export default function Footer() {
+  const { t } = useTranslation()
+
   return (
     <footer>
       <div className="wrap">
-        <span>© 2026 trainedbyvinto — Luzern, Schweiz</span>
+        <span>{t('footer.copyright')}</span>
         <span>
-          <Link to="/#about">Über mich</Link> · <Link to="/programme">Programme</Link> · <Link to="/kontakt">Kontakt</Link>
+          <Link to={`${t('paths.home')}#about`}>{t('nav.about')}</Link> · <Link to={t('paths.programs')}>{t('nav.programs')}</Link> · <Link to={t('paths.contact')}>{t('nav.contact')}</Link>
         </span>
       </div>
     </footer>
