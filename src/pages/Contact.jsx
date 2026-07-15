@@ -41,6 +41,11 @@ export default function Contact() {
 
           <input type="text" name="name" placeholder={t('contact.namePlaceholder')} required />
           <input type="email" name="email" placeholder={t('contact.emailPlaceholder')} required />
+          <textarea
+            name="message"
+            rows={4}
+            placeholder={t('contact.messagePlaceholder', 'Deine Nachricht (optional)')}
+          />
           <input
             type="submit"
             className="btn-primary"
