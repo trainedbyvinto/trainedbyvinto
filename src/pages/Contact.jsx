@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export default function Contact() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [submitting, setSubmitting] = useState(false)
   const [message, setMessage] = useState({ text: '', color: '' })
 
@@ -44,7 +44,10 @@ export default function Contact() {
           <textarea
             name="message"
             rows={4}
-            placeholder={t('contact.messagePlaceholder', 'Deine Nachricht (optional)')}
+            placeholder={t(
+              'contact.messagePlaceholder',
+              i18n.language === 'en' ? 'Your message (optional)' : 'Deine Nachricht (optional)'
+            )}
           />
           <input
             type="submit"
