@@ -70,7 +70,7 @@
         "features": [
           "Individual training and nutrition plan",
           "Weekly check-ins",
-          "Direct WhatsApp chat support"
+          "Direct chat support via our own coaching app"
         ],
         "price": "From CHF 100",
         "priceUnit": "/ month"
@@ -127,6 +127,7 @@
     "emailSubject": "New coaching inquiry from trainedbyvinto.com",
     "namePlaceholder": "Your name",
     "emailPlaceholder": "Your email",
+    "messagePlaceholder": "Your message (optional)",
     "submit": "Send",
     "submitting": "Sending...",
     "successMessage": "Thanks for reaching out! I've received your message and will get back to you within 48 hours.",

@@ -70,7 +70,7 @@
         "features": [
           "Individueller Trainings- und Ernährungsplan",
           "Wöchentliche Check-ins",
-          "Direkter WhatsApp Chat-Support"
+          "Direkter Chat Support über eigene Coaching App"
         ],
         "price": "Ab CHF 100",
         "priceUnit": "/ Monat"
@@ -127,6 +127,7 @@
     "emailSubject": "Neue Coaching-Anfrage von trainedbyvinto.com",
     "namePlaceholder": "Dein Name",
     "emailPlaceholder": "Deine E-Mail",
+    "messagePlaceholder": "Deine Nachricht (optional)",
     "submit": "Absenden",
     "submitting": "Wird gesendet...",
     "successMessage": "Vielen Dank für deine Anfrage! Ich habe deine Nachricht erhalten und werde mich innerhalb von 48 Stunden bei dir melden.",
