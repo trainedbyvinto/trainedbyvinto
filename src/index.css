@@ -363,7 +363,22 @@ footer a{text-decoration:none; color:#AEB6BF;}
   section{padding:64px 0;}
 }
 
+/* ---------- scroll reveal ---------- */
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .7s cubic-bezier(.16,.8,.3,1), transform .7s cubic-bezier(.16,.8,.3,1);
+}
+.reveal.in-view{
+  opacity:1;
+  transform:none;
+}
+/* keep grid cells the same height once ProgramCard is wrapped in a Reveal */
+.programs-grid > .reveal{display:flex;}
+.programs-grid > .reveal > .program-card{flex:1 1 auto; min-width:0;}
+
 :focus-visible{outline:3px solid var(--rust); outline-offset:2px;}
 @media (prefers-reduced-motion: reduce){
   *{transition:none !important; scroll-behavior:auto !important;}
+  .reveal{opacity:1 !important; transform:none !important;}
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import Reveal from '../components/Reveal'
 
 export default function Contact() {
   const { t, i18n } = useTranslation()
@@ -32,31 +33,33 @@ export default function Contact() {
   return (
     <section className="cta" id="contact">
       <div className="wrap">
-        <h2>{t('contact.heading')}</h2>
-        <p>{t('contact.subheading')}</p>
-        <form action="https://api.web3forms.com/submit" method="POST" onSubmit={handleSubmit}>
-          <input type="hidden" name="access_key" value="ce19bb5f-1b2a-44b7-9b52-73dfa427bbbf" />
-          <input type="hidden" name="subject" value={t('contact.emailSubject')} />
-          <input type="checkbox" name="botcheck" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+        <Reveal as="h2">{t('contact.heading')}</Reveal>
+        <Reveal as="p" delay={80}>{t('contact.subheading')}</Reveal>
+        <Reveal delay={160}>
+          <form action="https://api.web3forms.com/submit" method="POST" onSubmit={handleSubmit}>
+            <input type="hidden" name="access_key" value="ce19bb5f-1b2a-44b7-9b52-73dfa427bbbf" />
+            <input type="hidden" name="subject" value={t('contact.emailSubject')} />
+            <input type="checkbox" name="botcheck" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
 
-          <input type="text" name="name" placeholder={t('contact.namePlaceholder')} required />
-          <input type="email" name="email" placeholder={t('contact.emailPlaceholder')} required />
-          <textarea
-            name="message"
-            rows={4}
-            placeholder={t(
-              'contact.messagePlaceholder',
-              i18n.language === 'en' ? 'Your message (optional)' : 'Deine Nachricht (optional)'
-            )}
-          />
-          <input
-            type="submit"
-            className="btn-primary"
-            style={{ cursor: 'pointer', border: 'none' }}
-            value={submitting ? t('contact.submitting') : t('contact.submit')}
-            disabled={submitting}
-          />
-        </form>
+            <input type="text" name="name" placeholder={t('contact.namePlaceholder')} required />
+            <input type="email" name="email" placeholder={t('contact.emailPlaceholder')} required />
+            <textarea
+              name="message"
+              rows={4}
+              placeholder={t(
+                'contact.messagePlaceholder',
+                i18n.language === 'en' ? 'Your message (optional)' : 'Deine Nachricht (optional)'
+              )}
+            />
+            <input
+              type="submit"
+              className="btn-primary"
+              style={{ cursor: 'pointer', border: 'none' }}
+              value={submitting ? t('contact.submitting') : t('contact.submit')}
+              disabled={submitting}
+            />
+          </form>
+        </Reveal>
         {message.text && (
           <p style={{ marginTop: '20px', color: message.color, fontWeight: 600 }}>{message.text}</p>
         )}

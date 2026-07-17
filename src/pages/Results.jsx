@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import BeforeAfterSlider from '../components/BeforeAfterSlider'
+import Reveal from '../components/Reveal'
 
 export default function Results() {
   const { t } = useTranslation()
@@ -8,15 +9,15 @@ export default function Results() {
   return (
     <section className="transformations" id="transformations">
       <div className="wrap">
-        <div className="section-head">
+        <Reveal className="section-head">
           <span className="eyebrow">{t('results.eyebrow')}</span>
           <h2>{t('results.heading')}</h2>
           <p>{t('results.subheading')}</p>
-        </div>
+        </Reveal>
 
         <div className="slider-grid">
-          {transformations.map((tf) => (
-            <div className="slide-card" key={tf.label}>
+          {transformations.map((tf, i) => (
+            <Reveal as="div" className="slide-card" key={tf.label} delay={i * 100}>
               <BeforeAfterSlider
                 beforeSrc={tf.before}
                 afterSrc={tf.after}
@@ -24,7 +25,7 @@ export default function Results() {
                 afterAlt={t('results.altAfter', { label: tf.label })}
               />
               <div className="slide-meta"><b>{tf.label}</b><span>{tf.duration}</span></div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

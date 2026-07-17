@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import ProgramCard from '../components/ProgramCard'
+import Reveal from '../components/Reveal'
 
 export default function Programs() {
   const { t } = useTranslation()
@@ -8,14 +9,16 @@ export default function Programs() {
   return (
     <section className="programs" id="programs">
       <div className="wrap">
-        <div className="section-head">
+        <Reveal className="section-head">
           <span className="eyebrow">{t('programs.eyebrow')}</span>
           <h2>{t('programs.heading')}</h2>
           <p>{t('programs.subheading')}</p>
-        </div>
+        </Reveal>
         <div className="programs-grid">
-          {programs.map((program) => (
-            <ProgramCard key={program.title} {...program} />
+          {programs.map((program, i) => (
+            <Reveal key={program.title} delay={i * 100}>
+              <ProgramCard {...program} />
+            </Reveal>
           ))}
         </div>
       </div>
